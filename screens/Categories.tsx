@@ -1,14 +1,36 @@
-import {FlatList} from "react-native";
-
-import {CATEGORIES} from "../data/dummy-data";
+import { FlatList, ListRenderItemInfo } from "react-native";
+import { CATEGORIES } from "../data/dummy-data";
 import Category from "../data/models/category";
-
-function renderCategoryItem(item: Category) {
-  return
-}
+import CategoryGridTile from "../components/CategoryGridTile";
+import { useNavigation } from "@react-navigation/native";
 
 function Categories() {
-  return <FlatList data={CATEGORIES} keyExtractor={item => item.id} renderItem={} />
+  const navigation = useNavigation();
+
+  function renderCategoryItem(itemData: ListRenderItemInfo<Category>) {
+    function pressHandler() {
+      navigation.navigate("MealsOverview" as never, {
+        categoryId: itemData.item.id,
+      });
+    }
+
+    return (
+      <CategoryGridTile
+        title={itemData.item.title}
+        color={itemData.item.color}
+        onPress={pressHandler}
+      />
+    );
+  }
+
+  return (
+    <FlatList
+      data={CATEGORIES}
+      keyExtractor={(item) => item.id}
+      renderItem={renderCategoryItem}
+      numColumns={2}
+    />
+  );
 }
 
 export default Categories;
