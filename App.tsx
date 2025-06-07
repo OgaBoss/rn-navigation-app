@@ -1,13 +1,55 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { Button, StyleSheet } from "react-native";
 import Categories from "./screens/Categories";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MealsOverview from "./screens/MealsOverview";
 import MealDetails from "./screens/MealDetails";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Favourite } from "./screens/Favourite";
+import { Ionicons } from "@expo/vector-icons";
+import { RootStackParamList } from "./types/navigation";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const Drawer = createDrawerNavigator();
 
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#431a02" },
+        headerTintColor: "white",
+        sceneStyle: { backgroundColor: "#3f2f25" },
+        drawerContentStyle: {
+          backgroundColor: "#3f2f25",
+        },
+        drawerInactiveTintColor: "white",
+        drawerActiveTintColor: "#e4baa1",
+      }}
+    >
+      <Drawer.Screen
+        name="Categories"
+        component={Categories}
+        options={{
+          title: "All Categories",
+          drawerIcon: ({ color, size }) => {
+            return <Ionicons name="list" color={color} size={size} />;
+          },
+        }}
+      />
+      <Drawer.Screen
+        name="Favourites"
+        component={Favourite}
+        options={{
+          title: "All Favourite",
+          drawerIcon: ({ color, size }) => {
+            return <Ionicons name="star" color={color} size={size} />;
+          },
+        }}
+      />
+    </Drawer.Navigator>
+  );
+}
 export default function App() {
   return (
     <>
@@ -22,9 +64,9 @@ export default function App() {
         >
           <Stack.Screen
             name="MealsCategories"
-            component={Categories}
+            component={DrawerNavigator}
             options={{
-              title: "Meals Categories",
+              headerShown: false,
             }}
           />
           <Stack.Screen
@@ -37,7 +79,15 @@ export default function App() {
             //   };
             // }}
           />
-          <Stack.Screen name="MealsDetails" component={MealDetails} />
+          <Stack.Screen
+            name="MealDetails"
+            component={MealDetails}
+            options={{
+              headerRight: () => {
+                return <Button title="Tap Me" />;
+              },
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

@@ -30,7 +30,7 @@ function MealItem({
   const navigation = useNavigation<any>();
 
   function selectMealHandler() {
-    navigation.navigate("MealsDetails" as never, {
+    navigation.navigate("MealDetails" as never, {
       mealId: id,
     });
   }

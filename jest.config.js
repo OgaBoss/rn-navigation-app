@@ -1,7 +1,9 @@
 module.exports = {
   preset: "jest-expo",
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  transformIgnorePatterns: ["node_modules/"],
+  transformIgnorePatterns: [
+    "node_modules/(?!(jest-)?react-native|@react-native|expo-modules-core|@expo|expo|@expo/vector-icons|react-navigation|@react-navigation/.*)"
+  ],
   setupFiles: ["<rootDir>/jest.setup.js"],
   testMatch: ["**/__tests__/**/*.spec.[jt]s?(x)"],
   transform: {

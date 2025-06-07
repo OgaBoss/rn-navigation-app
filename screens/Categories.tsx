@@ -10,7 +10,7 @@ function Categories() {
   function renderCategoryItem(itemData: ListRenderItemInfo<Category>) {
     function pressHandler() {
       navigation.navigate("MealsOverview" as never, {
-        categoryId: itemData.item.id,
+        categoryId: itemData.item.id as string,
       });
     }
 

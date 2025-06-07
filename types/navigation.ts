@@ -1,14 +1,14 @@
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import MealDetails from "../screens/MealDetails";
 
 // Define the RootStackParamList as usual
-type RootStackParamList = {
+export type RootStackParamList = {
   MealsOverview: {
     categoryId: string;
   };
   MealDetails: {
     mealId: string;
   };
+  MealsCategories: object;
 };
 
 // Define a generic type for screen props

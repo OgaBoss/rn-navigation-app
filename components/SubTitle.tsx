@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-function SubTitle({ children }) {
+function SubTitle({ children }: { children: React.ReactNode }) {
   return (
     <View style={styles.subTitleContainer}>
       <Text style={styles.subTitle}>{children}</Text>
